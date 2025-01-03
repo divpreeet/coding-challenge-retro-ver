@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Coding Arcade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: #3C2A21;
+            color: #E5E5CB;
+            text-shadow: 2px 2px #0006;
+        }
+        .pixelated {
+            image-rendering: pixelated;
+        }
+        .blink {
+            animation: blink 1s steps(2, start) infinite;
+        }
+        @keyframes blink {
+            to {
+                visibility: hidden;
+            }
+        }
+        .btn-retro {
+            transition: all 0.1s ease;
+        }
+        .btn-retro:active {
+            transform: scale(0.95);
+            box-shadow: inset 2px 2px 0 #1A120B, inset -2px -2px 0 #D5CEA3;
+        }
+        .pixel-border {
+            box-shadow: 0 0 0 2px #E5E5CB,
+                        0 0 0 4px #3C2A21,
+                        0 0 0 6px #E5E5CB,
+                        0 0 0 8px #3C2A21;
+        }
+        .coffee-steam {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #E5E5CB;
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0;
+            animation: steam 2s infinite;
+        }
+        @keyframes steam {
+            0% {
+                transform: translateY(0) scale(1);
+                opacity: 0;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                transform: translateY(-20px) scale(1.5);
+                opacity: 0;
+            }
+        }
+        .pixel-coffee {
+            width: 32px;
+            height: 32px;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAADkUlEQVR4nO2WW0hjVRjH/2vvnZykSZqkd9LUibFemtqxVWuFURGZQR0RfBrwYXwQfBMfBkHEl1EQYXzxQXwaxIFBGBgYGIZhGIZhKOXQUkpbWmnT3NKkSZqc5Jy91rBXxhNPk6aXGUYX/Nln7/9a61vf+r71Ef6nIQCgPE+DnudhmiZM04BhGKjXG6hWa6jVaqjX66jX66jVarAsC4SQO0wIgcfjgc/ng8/ng9/vh9/vRygUQiQSgc/nA8uyoJQ+GoCUEmtra1hcXMTKygpWV1dx/fp1lMtlVCoVVKtV6LoOXddhGAYMw4Cu6yiXy9je3ka5XEaxWIRlWTh16hSi0SgSiQSSySRSqRQymQzi8fhDAWzbxtzcHGZnZzE/P4+FhQWsra2hWCyiVCqhXC6jUqlA0zTU63VYlgXLsmBZFizLwu7uLvb29rC/v49CoYB8Po9cLofNzU1ks1mMjIwgk8kgk8ng7NmzGB4eRjKZhMfjeTBALpfDp59/gW+++x43b95EsVhEqVRCuVyGpmkwDAOWZcG2bViWBSklpJSwbRtSSti2DSklpJSwLAuapqFQKGBzcxNra2tYXl7GjRs3cOnSJbz++ms4f/78/QEWFhbw4Ycf4bPPv0CxVIKmaW6WrjZCCNi2DSmlm7XzXQgBKSWEELAsC0II2LYNwzBQKpWwsbGB5eVlLC4uYm5uDu+88zZef+MN+P3+ewNMT0/jvXffw+TkJPb391GtVmFZlpudk6mT8Z3ZO9+dTJ373J25pmkolUooFApYX1/H6uoq5ufnMTMzg5dffglvvfUmwuHwnQAff/IJ3n//A2SzWZRKJZimiXq9DsMwYJqmW2fHbKZpQtd1GIbhNqJpmtB1HZqmwTRN1Go1VCoVFItF5HI5bG1tYWNjAysrK5iamsKFCxfwyiuvIBQK3QaYnJzEG2++hevXr6NQKEBK6T6AYRjuVDhZ3nl0Op+dZ3Ay1nUdtVoN1WoVe3t7yOfz2NnZQS6Xw9bWFpaWljA1NYVnnnkGr776KgYGBm4DvPHmW5icnMTu7i7q9bprOtM0YVkWbNt2s3ayFUK4jXin+RzTOQCO+SqVCvb397GzsxPc2tqKbG9v9+3s7ESLxWJPpVIJa5oW1HWdWpYlCSHteDxeSafTm4ODg9dGR0evnTlzZqO/v7+STCYxODiIvr6+2wDPPf8CZmZm3Mzv14SOJ51GvLMRnWZ0jOfMfrFYRD6fd2d/e3sb2WwWk5OT+OjDD/DkE0/8qx7/o/EXUXA0sA/S/X0AAAAASUVORK5CYII=');
+            background-size: cover;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#3C2A21]">
+    <header class="text-4xl p-4 text-center bg-[#1A120B] border-b-4 border-[#D5CEA3] relative">
+        <h1 class="blink">Coffee Coding Arcade</h1>
+        <div class="pixel-coffee absolute top-2 right-2"></div>
+        <div class="coffee-steam absolute top-0 right-8"></div>
+        <div class="coffee-steam absolute top-2 right-10" style="animation-delay: 0.5s;"></div>
+    </header>
+
+    <main class="flex-grow flex">
+        <div class="w-1/4 p-4 bg-[#1A120B] border-r-4 border-[#D5CEA3] flex flex-col">
+            <section id="language-select" class="mb-6">
+                <h2 class="text-xl mb-4">Select Language:</h2>
+                <div class="flex flex-col space-y-2">
+                    <button class="btn-retro bg-[#D5CEA3] hover:bg-[#E5B299] text-[#1A120B] px-4 py-2 rounded" data-lang="javascript">JavaScript</button>
+                    <button class="btn-retro bg-[#D5CEA3] hover:bg-[#E5B299] text-[#1A120B] px-4 py-2 rounded" data-lang="python">Python</button>
+                    <button class="btn-retro bg-[#D5CEA3] hover:bg-[#E5B299] text-[#1A120B] px-4 py-2 rounded" data-lang="cpp">C++</button>
+                </div>
+            </section>
+            <section id="score-area" class="mt-auto">
+                <h2 class="text-xl mb-2">Score: <span id="score">0</span></h2>
+                <h3 class="text-lg">Level: <span id="level">1</span></h3>
+                <div id="progress-bar" class="w-full bg-[#3C2A21] rounded-full h-2.5 mt-2">
+                    <div class="bg-[#D5CEA3] h-2.5 rounded-full" style="width: 0%"></div>
+                </div>
+            </section>
+        </div>
+
+        <div class="w-3/4 p-4 flex flex-col">
+            <section id="challenge-area" class="mb-4 hidden">
+                <h2 class="text-xl mb-4">Challenge:</h2>
+                <p id="challenge-text" class="mb-4 bg-[#1A120B] p-4 rounded pixel-border"></p>
+                <textarea id="code-input" class="w-full h-48 bg-[#1A120B] text-[#E5E5CB] p-2 rounded pixel-border mb-4" placeholder="Type your code here..."></textarea>
+                <div class="flex justify-between">
+                    <button id="hint-btn" class="btn-retro bg-[#D5CEA3] hover:bg-[#E5B299] text-[#1A120B] px-4 py-2 rounded">Hint</button>
+                    <button id="next-btn" class="btn-retro bg-[#D5CEA3] hover:bg-[#E5B299] text-[#1A120B] px-4 py-2 rounded hidden">Next Challenge</button>
+                </div>
+            </section>
+
+            <section id="output-area" class="flex-grow hidden">
+                <h2 class="text-xl mb-2">Output:</h2>
+                <pre id="output" class="bg-[#1A120B] p-4 rounded pixel-border overflow-x-auto h-full"></pre>
+            </section>
+        </div>
+    </main>
+
+    <footer class="p-4 bg-[#1A120B] border-t-4 border-[#D5CEA3] text-center">
+        <p>&copy; 2023 Coffee Coding Arcade</p>
+    </footer>
+
+    <div id="achievement-popup" class="fixed top-4 right-4 bg-[#D5CEA3] text-[#1A120B] p-4 rounded pixel-border hidden">
+        <h3 class="text-lg font-bold mb-2">Achievement Unlocked!</h3>
+        <p id="achievement-text"></p>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
